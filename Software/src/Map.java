@@ -2,10 +2,10 @@ import java.io.*;
 
 public class Map {
     private static String[][] map;
-    private static int startRow;
-    private static int startCol;
+    private static int startRow=0;
+    private static int startCol=0;
 
-    public static String[][] loadMap(String filePath){
+    public Map(String filePath) {
 
         map = new String[20][20];
 
@@ -47,6 +47,23 @@ public class Map {
         }catch(IOException e){
             System.out.println(e);
         }
+    }
+
+    public static String[][] getMap() {
         return map;
     }
+
+    public static void drawMap(){
+        for (int i=startRow; i< map.length; i++){
+            for (int j=startCol; j<map[0].length; j++){
+                if (map[i][j] == null){
+                    System.out.print(" ");
+                }else {
+                    System.out.print(map[i][j]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }
