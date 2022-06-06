@@ -12,8 +12,8 @@ public class Main{
     private static Dice dice = new Dice();
     private static Move move = new Move();
 
-    private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
-//    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
+//    private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
+    private static final String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 //        new EventFireGui();
@@ -35,8 +35,12 @@ public class Main{
 //      ---------------------------------------------게임 인원 관련 코드-------------------------------------------
 
         do{
-            System.out.print("게임 인원(2~4인) : ");
-            numOfParticipants = Integer.parseInt(sc.nextLine());
+            try{
+                System.out.print("게임 인원(2~4인) : ");
+                numOfParticipants = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("try again..");
+            }
         }while(numOfParticipants<2 || numOfParticipants >4);
 
         // 플레이어 객체 생성
@@ -51,14 +55,20 @@ public class Main{
 //      ---------------------------------------------게임 진행 코드-------------------------------------------
 
         int index = 0;
-        while(true){
-            index %= 4;
+        int rank = 1; // 게임에서 순위를 정하는데 사용됨
+        while(rank != numOfParticipants){
+            index %= player.size();
+            if (player.get(index).getRank() != -1){
+                index++;
+                continue;
+            }
 
             // 차례 알려주기
-            System.out.println("turn : " + player.get(index).getMyIndex());
+            System.out.println("player " + player.get(index).getMyIndex() + " turn ");
 
             // 주사위 돌리기
-            int gained_number = dice.getNumber();
+//            int gained_number = dice.getNumber();
+            int gained_number = 6;
             System.out.println("gained_number :" + gained_number);
 
             int row;
@@ -71,7 +81,7 @@ public class Main{
                 ;
 
                 String[] arr = str.split("(?<!^)");
-//            for(int i=0; i<arr.length; i++) System.out.printf("%s, ",arr[i]);
+
                 row = player.get(index).getCurrentRow();
                 col = player.get(index).getCurrentCol();
 
@@ -88,12 +98,13 @@ public class Main{
                                 col += direction.get("col");
                             }else flag = false;
 
+                            if(map.getCell(row,col).equals("E")){
+                                player.get(index).setRank(rank++);
+                                break;
+                            }
+
                         }else flag = false;
-//                        if (arr[i].equals('u') || arr[i].equals("U"))  col--;
-//                        else if (arr[i].equals('d') || arr[i].equals('D')) col++;
-//                        else if (arr[i].equals('r') || arr[i].equals('R')) row++;
-//                        else if (arr[i].equals('l') || arr[i].equals('l')) row--;
-//                        else System.out.println("String error");
+
                     }
                 }else flag = false;
 
@@ -101,8 +112,6 @@ public class Main{
                     System.out.println("String error");
                     continue;
                 }
-//                row = player.get(index).getCurrentRow() + row;
-//                col = player.get(index).getCurrentCol() + col;
                 if (map.getCell(row, col) != null) {
                     player.get(index).getCard(map.getCell(row, col));
                     player.get(index).UpdateState(row, col);
@@ -110,11 +119,9 @@ public class Main{
                     break;
                 }
 
-
             }
             player.get(index).printCard();
             index++;
-            break;
         }
     }
 }

@@ -4,13 +4,15 @@ public class Player extends User{
     private int currentCol;
     private int myIndex;
     private GatheredCard gatheredCard;
+    private int rank;
 
-    public Player(int row, int col){
+    Player(int row, int col){
 
 //        currentPlace = "0 0";
         currentRow = row;
         currentCol = col;
         gatheredCard = new GatheredCard();
+        rank=-1;
     }
 
 //    public void setCurrentPlace(String currentPlace) {
@@ -55,6 +57,14 @@ public class Player extends User{
     }
     public void getCard(String card){
         gatheredCard.setCard(card);
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public void printCard(){
