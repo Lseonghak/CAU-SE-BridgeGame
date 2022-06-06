@@ -7,6 +7,7 @@ public class Main{
     private static int startCol;
     private static int numOfParticipants; //게임 참가 인원
     private static ArrayList<Player> player;
+    private static Dice dice = new Dice();
 
     private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
 //    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
@@ -40,5 +41,10 @@ public class Main{
             player.add(member);
         }
 
+//      ---------------------------------------------게임 진행 코드-------------------------------------------
+
+        while(true){
+
+        }
     }
 }
