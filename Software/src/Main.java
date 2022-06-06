@@ -58,7 +58,7 @@ public class Main{
             System.out.println("turn : " + player.get(index).getMyIndex());
 
             // 주사위 돌리기
-            int gained_number = 6;
+            int gained_number = dice.getNumber();
             System.out.println("gained_number :" + gained_number);
 
             int row;
@@ -112,7 +112,7 @@ public class Main{
 
 
             }
-
+            player.get(index).printCard();
             index++;
             break;
         }
