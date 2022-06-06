@@ -54,8 +54,8 @@ public class Map {
     }
 
     public static void drawMap(){
-        for (int i=startRow; i< map.length; i++){
-            for (int j=startCol; j<map[0].length; j++){
+        for (int i=0; i< map.length; i++){
+            for (int j=0; j<map[0].length; j++){
                 if (map[i][j] == null){
                     System.out.print(" ");
                 }else {
