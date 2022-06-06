@@ -58,12 +58,13 @@ public class Main{
             System.out.println("turn : " + player.get(index).getMyIndex());
 
             // 주사위 돌리기
-            int gained_number = dice.getNumber();
+            int gained_number = 6;
             System.out.println("gained_number :" + gained_number);
 
             int row;
             int col;
             while(true) {
+                boolean flag = true; // player의 말이 잘못 움직이면 false
                 // 움직이는 방향 입력받기
                 System.out.print("enter your direction : ");
                 String str = sc.nextLine().replaceAll("\\s", "");
@@ -71,41 +72,45 @@ public class Main{
 
                 String[] arr = str.split("(?<!^)");
 //            for(int i=0; i<arr.length; i++) System.out.printf("%s, ",arr[i]);
-                row = 0;
-                col = 0;
+                row = player.get(index).getCurrentRow();
+                col = player.get(index).getCurrentCol();
 
+                // 입력한 문자 수와 주사위 수가 같은지를 확인
                 if (arr.length == gained_number) {
                     for (int i = 0; i < gained_number; i++) {
+                        // index에 위치한 문자가 u,r,d,l에 있는지 판단
                         if (move.IsContain(arr[i])) {
                             HashMap<String, Integer> direction = move.getDirection(arr[i]);
-                            if (direction.keySet().toArray()[0].equals("row")) row += direction.get("row");
-                            else if (direction.keySet().toArray()[0].equals("col")) col += direction.get("col");
+                            // index에 위치한 문자가 row인지 col인지 판단
+                            if (direction.keySet().toArray()[0].equals("row") && map.getCell(direction.get("row")+row,col)!=null){
+                                row += direction.get("row");
+                            }else if (direction.keySet().toArray()[0].equals("col") && map.getCell(row,col+direction.get("col"))!=null){
+                                col += direction.get("col");
+                            }else flag = false;
 
-                        } else {
-                            System.out.println("String error");
-                            break;
-                        }
-
+                        }else flag = false;
 //                        if (arr[i].equals('u') || arr[i].equals("U"))  col--;
 //                        else if (arr[i].equals('d') || arr[i].equals('D')) col++;
 //                        else if (arr[i].equals('r') || arr[i].equals('R')) row++;
 //                        else if (arr[i].equals('l') || arr[i].equals('l')) row--;
 //                        else System.out.println("String error");
                     }
-                }else{
+                }else flag = false;
+
+                if (!flag){
                     System.out.println("String error");
                     continue;
                 }
-
-
-                row = player.get(index).getCurrentRow() + row;
-                col = player.get(index).getCurrentCol() + col;
+//                row = player.get(index).getCurrentRow() + row;
+//                col = player.get(index).getCurrentCol() + col;
                 if (map.getCell(row, col) != null) {
                     player.get(index).getCard(map.getCell(row, col));
                     player.get(index).UpdateState(row, col);
                     System.out.println("player's state : " + player.get(index).getCurrentRow() + player.get(index).getCurrentCol());
                     break;
                 }
+
+
             }
 
             index++;
