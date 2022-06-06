@@ -41,13 +41,35 @@ public class Main{
         // arraylist에 객체 add
         for (int i=0; i<numOfParticipants; i++){
             Player member = new Player(startRow, startCol);
+            member.setMyIndex(i);
             player.add(member);
         }
 
 //      ---------------------------------------------게임 진행 코드-------------------------------------------
 
+        int index = 0;
         while(true){
+            index %= 4;
 
+            // 차례 알려주기
+            System.out.println("turn : " + player.get(index).getMyIndex());
+
+            // 주사위 돌리기
+            int gained_number = dice.getNumber();
+            System.out.println("gained_number :" + gained_number);
+
+            // 움직이는 방향 입력받기
+
+            System.out.print("enter your direction : ");
+            String str = sc.next();
+
+            String[] arr = str.split("(?<!^)");
+            for(int i=0; i<arr.length; i++) System.out.printf("%s, ",arr[i]);
+
+
+
+            index++;
+            break;
         }
     }
 }

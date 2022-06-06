@@ -3,6 +3,7 @@ public class Player extends User{
     private int currentRow;
     private int currentCol;
     private int score;
+    private int myIndex;
     private GatheredCard gatheredCard;
 
     public Player(int row, int col){
@@ -40,5 +41,13 @@ public class Player extends User{
 
     public int getScore() {
         return score;
+    }
+
+    public void setMyIndex(int myIndex) {
+        this.myIndex = myIndex;
+    }
+
+    public int getMyIndex() {
+        return myIndex;
     }
 }

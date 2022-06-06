@@ -25,7 +25,6 @@ public class Map {
 
                 // map의 시작 index를 저장
                 if (rowLine[0].equals("S") && flag == true){
-                    System.out.println("---");
                     startRow = row;
                     startCol = col;
                     flag = false;
