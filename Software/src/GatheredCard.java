@@ -42,4 +42,10 @@ public class GatheredCard {
     public void setBridge(int bridge) {
         this.bridge = bridge;
     }
+
+    public void setCard(String card){
+        if (card.equals("P")) p++;
+        else if (card.equals("H")) h++;
+        else if (card.equals("S")) s++;
+    }
 }

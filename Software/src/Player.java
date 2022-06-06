@@ -50,4 +50,15 @@ public class Player extends User{
     public int getMyIndex() {
         return myIndex;
     }
+
+//    public String getCard(String card){
+//
+//    }
+    public void UpdateState(int row, int col){
+        currentRow = row;
+        currentCol = col;
+    }
+    public void getCard(String card){
+        gatheredCard.setCard(card);
+    }
 }

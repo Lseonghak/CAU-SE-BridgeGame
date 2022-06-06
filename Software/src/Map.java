@@ -1,13 +1,17 @@
 import java.io.*;
+import java.util.HashMap;
 
 public class Map {
     private static String[][] map;
     private static int startRow=0;
     private static int startCol=0;
 
+    private Move move;
+
     public Map(String filePath) {
 
         map = new String[20][20];
+        move = new Move();
 
         try{
             // 파일 객체 생성
@@ -33,10 +37,15 @@ public class Map {
                 try{
                     map[row][col] = rowLine[0];
                     // map을 배열에 그린다.
-                    if (rowLine[rowLine.length-1].equals("R")){col++;}
-                    else if(rowLine[rowLine.length-1].equals("D")){row++;}
-                    else if(rowLine[rowLine.length-1].equals("U")){row--;}
-                    else if(rowLine[rowLine.length-1].equals("L")){col--;}
+                    if (move.IsContain(rowLine[rowLine.length-1])){
+                        HashMap<String,Integer> direction = move.getDirection(rowLine[rowLine.length-1]);
+                        if (direction.keySet().toArray()[0].equals("row")) row += direction.get("row");
+                        else if (direction.keySet().toArray()[0].equals("col")) col += direction.get("col");
+                    }
+//                    if (rowLine[rowLine.length-1].equals("R")){col++;}
+//                    else if(rowLine[rowLine.length-1].equals("D")){row++;}
+//                    else if(rowLine[rowLine.length-1].equals("U")){row--;}
+//                    else if(rowLine[rowLine.length-1].equals("L")){col--;}
                 }catch (ArrayIndexOutOfBoundsException e){
                     System.out.println(e);
                 }
@@ -51,8 +60,8 @@ public class Map {
         }
     }
 
-    public static String[][] getMap() {
-        return map;
+    public static String getCell(int row, int col) {
+        return map[row][col];
     }
 
     public static void drawMap(){
@@ -75,4 +84,5 @@ public class Map {
     public static int getStartCol() {
         return startCol;
     }
+
 }

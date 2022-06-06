@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main{
@@ -8,6 +10,7 @@ public class Main{
     private static int numOfParticipants; //게임 참가 인원
     private static ArrayList<Player> player;
     private static Dice dice = new Dice();
+    private static Move move = new Move();
 
     private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
 //    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
@@ -33,7 +36,7 @@ public class Main{
 
         do{
             System.out.print("게임 인원(2~4인) : ");
-            numOfParticipants = sc.nextInt();
+            numOfParticipants = Integer.parseInt(sc.nextLine());
         }while(numOfParticipants<2 || numOfParticipants >4);
 
         // 플레이어 객체 생성
@@ -58,15 +61,52 @@ public class Main{
             int gained_number = dice.getNumber();
             System.out.println("gained_number :" + gained_number);
 
-            // 움직이는 방향 입력받기
+            int row;
+            int col;
+            while(true) {
+                // 움직이는 방향 입력받기
+                System.out.print("enter your direction : ");
+                String str = sc.nextLine().replaceAll("\\s", "");
+                ;
 
-            System.out.print("enter your direction : ");
-            String str = sc.next();
+                String[] arr = str.split("(?<!^)");
+//            for(int i=0; i<arr.length; i++) System.out.printf("%s, ",arr[i]);
+                row = 0;
+                col = 0;
 
-            String[] arr = str.split("(?<!^)");
-            for(int i=0; i<arr.length; i++) System.out.printf("%s, ",arr[i]);
+                if (arr.length == gained_number) {
+                    for (int i = 0; i < gained_number; i++) {
+                        if (move.IsContain(arr[i])) {
+                            HashMap<String, Integer> direction = move.getDirection(arr[i]);
+                            if (direction.keySet().toArray()[0].equals("row")) row += direction.get("row");
+                            else if (direction.keySet().toArray()[0].equals("col")) col += direction.get("col");
+
+                        } else {
+                            System.out.println("String error");
+                            break;
+                        }
+
+//                        if (arr[i].equals('u') || arr[i].equals("U"))  col--;
+//                        else if (arr[i].equals('d') || arr[i].equals('D')) col++;
+//                        else if (arr[i].equals('r') || arr[i].equals('R')) row++;
+//                        else if (arr[i].equals('l') || arr[i].equals('l')) row--;
+//                        else System.out.println("String error");
+                    }
+                }else{
+                    System.out.println("String error");
+                    continue;
+                }
 
 
+                row = player.get(index).getCurrentRow() + row;
+                col = player.get(index).getCurrentCol() + col;
+                if (map.getCell(row, col) != null) {
+                    player.get(index).getCard(map.getCell(row, col));
+                    player.get(index).UpdateState(row, col);
+                    System.out.println("player's state : " + player.get(index).getCurrentRow() + player.get(index).getCurrentCol());
+                    break;
+                }
+            }
 
             index++;
             break;
