@@ -66,4 +66,11 @@ public class Map {
         }
     }
 
+    public static int getStartRow() {
+        return startRow;
+    }
+
+    public static int getStartCol() {
+        return startCol;
+    }
 }
