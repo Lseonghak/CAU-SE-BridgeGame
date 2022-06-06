@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main{
     private static String[][] map;
 
-    private static String filePath = "/Users/seonghak/Downloads/default.map";
+    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
 //    private static String filePath = "/Users/seonghak/Downloads/another.map";
     public static void main(String[] args) {
 //        new EventFireGui();
