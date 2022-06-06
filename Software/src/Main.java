@@ -13,13 +13,17 @@ public class Main{
     public static void main(String[] args) {
 //        new EventFireGui();
 
+        // map을 load한다.
         map = new Map(filePath);
+
+        // map의 시작 위치를 찾는다.
         try {
             startRow = map.getStartRow();
             startCol = map.getStartCol();
         } catch (NullPointerException e){
             System.out.println(e);
         }
+        // map을 그린다.
         map.drawMap();
 
     }
