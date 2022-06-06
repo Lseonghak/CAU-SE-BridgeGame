@@ -74,4 +74,11 @@ public class Player extends User{
         System.out.println("Bridge :" + gatheredCard.getBridge());
         System.out.println("Score :" + gatheredCard.getScore());
     }
+    public void printCurrentState(){
+        System.out.println("player's state : [" + currentRow +","+ currentCol + "]");
+
+    }
+    public int getBridgeCard(){
+        return gatheredCard.getBridge();
+    }
 }

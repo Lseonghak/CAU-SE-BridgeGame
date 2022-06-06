@@ -19,7 +19,7 @@ public class Move {
 
 
 
-    public boolean IsContain(String s){
+    public boolean IsContainDirection(String s){
         if (Arrays.asList(direction).contains(s)) return true;
         else return false;
 
@@ -41,5 +41,20 @@ public class Move {
         System.arraycopy(row_direction,0,dest,0,row_direction.length);
         System.arraycopy(col_direction,0,dest,row_direction.length,row_direction.length);
         return dest;
+    }
+
+    public int getValue(String s){
+        return map.get(s);
+    }
+
+    public boolean IsContainRowDirection(String s) {
+        if (Arrays.asList(row_direction).contains(s)) return true;
+
+        return false;
+    }
+
+    public boolean IsContainColDirection(String s) {
+        if (Arrays.asList(col_direction).contains(s)) return true;
+        return false;
     }
 }

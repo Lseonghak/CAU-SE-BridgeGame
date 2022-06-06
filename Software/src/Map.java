@@ -37,19 +37,12 @@ public class Map {
                 try{
                     map[row][col] = rowLine[0];
                     // map을 배열에 그린다.
-                    if (move.IsContain(rowLine[rowLine.length-1])){
-                        HashMap<String,Integer> direction = move.getDirection(rowLine[rowLine.length-1]);
-                        if (direction.keySet().toArray()[0].equals("row")) row += direction.get("row");
-                        else if (direction.keySet().toArray()[0].equals("col")) col += direction.get("col");
-                    }
-//                    if (rowLine[rowLine.length-1].equals("R")){col++;}
-//                    else if(rowLine[rowLine.length-1].equals("D")){row++;}
-//                    else if(rowLine[rowLine.length-1].equals("U")){row--;}
-//                    else if(rowLine[rowLine.length-1].equals("L")){col--;}
+                    String s = rowLine[rowLine.length-1];
+                    if (move.IsContainRowDirection(s)) row += move.getValue(s);
+                    else if (move.IsContainColDirection(s)) col += move.getValue(s);
                 }catch (ArrayIndexOutOfBoundsException e){
                     System.out.println(e);
                 }
-//                System.out.println(line);
             }
             //.readLine()은 끝에 개행문자를 읽지 않는다.
             bufReader.close();

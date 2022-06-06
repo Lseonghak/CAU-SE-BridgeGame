@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
     private static Map map;
@@ -63,8 +60,25 @@ public class Main{
                 continue;
             }
 
+            System.out.println("---------------------------------------");
             // 차례 알려주기
             System.out.println("player " + player.get(index).getMyIndex() + " turn ");
+            player.get(index).printCard();
+            player.get(index).printCurrentState();
+
+            int selected=0;
+            do {
+                try {
+                    System.out.print("1.roll the dice 2. stay(Bridge -1) : ");
+                    selected = Integer.parseInt(sc.nextLine());
+                    if (selected == 2) {
+                        index++;
+                        continue;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("try again..");
+                }
+            }while(selected!=1 || selected!=2);
 
             // 주사위 돌리기
 //            int gained_number = dice.getNumber();
@@ -76,7 +90,7 @@ public class Main{
             while(true) {
                 boolean flag = true; // player의 말이 잘못 움직이면 false
                 // 움직이는 방향 입력받기
-                System.out.print("enter your direction : ");
+                System.out.print("enter your direction(gained_number - Bridge) : ");
                 String str = sc.nextLine().replaceAll("\\s", "");
                 ;
 
@@ -86,27 +100,37 @@ public class Main{
                 col = player.get(index).getCurrentCol();
 
                 // 입력한 문자 수와 주사위 수가 같은지를 확인
-                if (arr.length == gained_number) {
-                    for (int i = 0; i < gained_number; i++) {
-                        // index에 위치한 문자가 u,r,d,l에 있는지 판단
-                        if (move.IsContain(arr[i])) {
-                            HashMap<String, Integer> direction = move.getDirection(arr[i]);
-                            // index에 위치한 문자가 row인지 col인지 판단
-                            if (direction.keySet().toArray()[0].equals("row") && map.getCell(direction.get("row")+row,col)!=null){
-                                row += direction.get("row");
-                            }else if (direction.keySet().toArray()[0].equals("col") && map.getCell(row,col+direction.get("col"))!=null){
-                                col += direction.get("col");
-                            }else flag = false;
+                if (arr.length != gained_number - player.get(index).getBridgeCard()) {
+                    System.out.println("num of string error");
+                    continue;
+                }
 
-                            if(map.getCell(row,col).equals("E")){
-                                player.get(index).setRank(rank++);
-                                break;
-                            }
+                for (String s : arr) {
+                    int scale = move.getValue(s);
+                    // 다리를 건널 경우
+                    if (map.getCell(row,col).equals("B") && (s.equals("r") || s.equals("R"))){
+                        do{
+                            col += move.getValue(s);
+                        }
+                        while(map.getCell(row,col) == null);
+                        player.get(index).getCard("Bridge");
 
-                        }else flag = false;
-
+                    } else if (move.IsContainRowDirection(s) && map.getCell(scale + row, col) != null) {// index에 위치한 문자가 row인지 col인지 판단하고 움직임
+                        row += move.getValue(s);
+                    } else if (move.IsContainColDirection(s) && map.getCell(row, col + scale) != null) {
+                        col += move.getValue(s);
+                    } else {
+                        flag = false;
+                        break;
                     }
-                }else flag = false;
+
+
+                    // end에 도착하면 순위를 측정하고 반복문을 나간다.
+                    if(map.getCell(row,col).equals("E")){
+                        player.get(index).setRank(rank++);
+                        break;
+                    }
+                }
 
                 if (!flag){
                     System.out.println("String error");
@@ -115,12 +139,11 @@ public class Main{
                 if (map.getCell(row, col) != null) {
                     player.get(index).getCard(map.getCell(row, col));
                     player.get(index).UpdateState(row, col);
-                    System.out.println("player's state : " + player.get(index).getCurrentRow() + player.get(index).getCurrentCol());
                     break;
                 }
 
             }
-            player.get(index).printCard();
+//            player.get(index).printCard();
             index++;
         }
 

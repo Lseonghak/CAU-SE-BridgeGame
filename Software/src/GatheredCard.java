@@ -63,6 +63,9 @@ public class GatheredCard extends Card{
             s++;
             score += cellScore.getS();
         }
+        else if(card.equals("Bridge")){
+            bridge++;
+        }
 
     }
 }
