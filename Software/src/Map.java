@@ -19,13 +19,16 @@ public class Map {
             String line = "";
             int row = 2;
             int col = 2;
+            boolean flag = true; // map에 S는 start와 saw가 있으므로 시작 s를 제외하고는 saw로 간주하기 위함
             while((line = bufReader.readLine()) != null){
                 String[] rowLine = line.split(" ");
 
                 // map의 시작 index를 저장
-                if (rowLine[0].equals("S")){
+                if (rowLine[0].equals("S") && flag == true){
+                    System.out.println("---");
                     startRow = row;
                     startCol = col;
+                    flag = false;
                 }
 
                 try{

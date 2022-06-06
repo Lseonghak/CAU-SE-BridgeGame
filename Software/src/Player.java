@@ -14,9 +14,9 @@ public class Player extends User{
         score = 0;
     }
 
-    public void setCurrentPlace(String currentPlace) {
-        this.currentPlace = currentPlace;
-    }
+//    public void setCurrentPlace(String currentPlace) {
+//        this.currentPlace = currentPlace;
+//    }
 
     public String getCurrentPlace() {
         return currentPlace;
@@ -26,8 +26,16 @@ public class Player extends User{
         return currentRow;
     }
 
+    public void setCurrentRow(int currentRow) {
+        this.currentRow = currentRow;
+    }
+
     public int getCurrentCol() {
         return currentCol;
+    }
+
+    public void setCurrentCol(int currentCol) {
+        this.currentCol = currentCol;
     }
 
     public int getScore() {

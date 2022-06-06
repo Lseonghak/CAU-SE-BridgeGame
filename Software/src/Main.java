@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,14 +33,12 @@ public class Main{
         numOfParticipants = sc.nextInt();
 
         // 플레이어 객체 생성
+        player = new ArrayList<Player>();
+        // arraylist에 객체 add
         for (int i=0; i<numOfParticipants; i++){
             Player member = new Player(startRow, startCol);
             player.add(member);
         }
-
-
-
-
 
     }
 }
