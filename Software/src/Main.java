@@ -2,17 +2,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main{
     private static Map map;
     private static int startRow;
     private static int startCol;
+    private static int numOfParticipants; //게임 참가 인원
+    private static ArrayList<Player> player;
 
-    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
+    private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
 //    private static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 //        new EventFireGui();
 
+//      ---------------------------------------------지도 관련 코드-------------------------------------------
         // map을 load한다.
         map = new Map(filePath);
 
@@ -25,6 +31,20 @@ public class Main{
         }
         // map을 그린다.
         map.drawMap();
+//      ---------------------------------------------게임 인원 관련 코드-------------------------------------------
+
+        System.out.print("게임 인원(2~4인) : ");
+        numOfParticipants = sc.nextInt();
+
+        // 플레이어 객체 생성
+        for (int i=0; i<numOfParticipants; i++){
+            Player member = new Player(startRow, startCol);
+            player.add(member);
+        }
+
+
+
+
 
     }
 }
