@@ -28,10 +28,13 @@ public class Main{
         }
         // map을 그린다.
         map.drawMap();
+
 //      ---------------------------------------------게임 인원 관련 코드-------------------------------------------
 
-        System.out.print("게임 인원(2~4인) : ");
-        numOfParticipants = sc.nextInt();
+        do{
+            System.out.print("게임 인원(2~4인) : ");
+            numOfParticipants = sc.nextInt();
+        }while(numOfParticipants<2 || numOfParticipants >4);
 
         // 플레이어 객체 생성
         player = new ArrayList<Player>();
