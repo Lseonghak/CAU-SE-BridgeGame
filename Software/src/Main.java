@@ -12,7 +12,6 @@ public class Main{
     private static final String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-//        new EventFireGui();
 
 //      ---------------------------------------------지도 관련 코드-------------------------------------------
         // map을 load한다.
@@ -74,8 +73,8 @@ public class Main{
             }while(selected!=1 || selected!=2);
 
             // 주사위 돌리기
-//            int gained_number = dice.getNumber();
-            int gained_number = 6;
+            int gained_number = dice.getNumber();
+//            int gained_number = 6;
             System.out.println("gained_number :" + gained_number);
 
             int row;
