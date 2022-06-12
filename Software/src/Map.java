@@ -8,9 +8,9 @@ public class Map {
 
     private Move move;
 
-    public Map(String filePath) {
+    Map(String filePath) {
 
-        map = new String[20][20];
+        map = new String[14][15];
         move = new Move();
 
         try{

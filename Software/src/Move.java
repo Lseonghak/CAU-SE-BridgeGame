@@ -19,21 +19,21 @@ public class Move {
 
 
 
-    public boolean IsContainDirection(String s){
-        if (Arrays.asList(direction).contains(s)) return true;
-        else return false;
-
-    }
-    public HashMap<String, Integer> getDirection(String s){
-        int step = map.get(s);
-        HashMap<String,Integer> tmp = new HashMap<>();
-        if (Arrays.asList(row_direction).contains(s)){
-            tmp.put("row",step);
-        }else if (Arrays.asList(col_direction).contains(s)){
-            tmp.put("col",step);
-        }
-        return tmp;
-    }
+//    public boolean IsContainDirection(String s){
+//        if (Arrays.asList(direction).contains(s)) return true;
+//        else return false;
+//
+//    }
+//    public HashMap<String, Integer> getDirection(String s){
+//        int step = map.get(s);
+//        HashMap<String,Integer> tmp = new HashMap<>();
+//        if (Arrays.asList(row_direction).contains(s)){
+//            tmp.put("row",step);
+//        }else if (Arrays.asList(col_direction).contains(s)){
+//            tmp.put("col",step);
+//        }
+//        return tmp;
+//    }
     private String[] Direction(String[] row_direction, String[] col_direction) {
         int destLength = row_direction.length + col_direction.length;
 

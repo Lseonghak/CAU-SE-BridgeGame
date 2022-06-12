@@ -1,6 +1,6 @@
 public class GatheredCard extends Card{
     private int score;
-    CellScore cellScore;
+    private CellScore cellScore;
 
     GatheredCard(){
         this.p = 0;
@@ -15,41 +15,22 @@ public class GatheredCard extends Card{
         return p;
     }
 
-    public void setP(int p) {
-        this.p = p;
-    }
-
     public int getH() {
         return h;
-    }
-
-    public void setH(int h) {
-        this.h = h;
     }
 
     public int getS() {
         return s;
     }
 
-    public void setS(int s) {
-        this.s = s;
-    }
-
     public int getBridge() {
         return bridge;
-    }
-
-    public void setBridge(int bridge) {
-        this.bridge = bridge;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public int getScore() {
         return score;
     }
+
     public void setCard(String card){
         if (card.equals("P")){
             p++;

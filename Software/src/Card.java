@@ -1,7 +1,7 @@
 public abstract class Card {
 
-    int p;
-    int h;
-    int s;
-    int bridge;
+    public int p;
+    public int h;
+    public int s;
+    public int bridge;
 }

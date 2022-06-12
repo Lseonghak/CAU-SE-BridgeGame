@@ -1,10 +1,10 @@
 public class Player extends User{
-    private String currentPlace;
     private int currentRow;
     private int currentCol;
     private int myIndex;
     private GatheredCard gatheredCard;
     private int rank;
+    private int score;
 
     Player(int row, int col){
 
@@ -15,28 +15,12 @@ public class Player extends User{
         rank=-1;
     }
 
-//    public void setCurrentPlace(String currentPlace) {
-//        this.currentPlace = currentPlace;
-//    }
-
-    public String getCurrentPlace() {
-        return currentPlace;
-    }
-
     public int getCurrentRow() {
         return currentRow;
     }
 
-    public void setCurrentRow(int currentRow) {
-        this.currentRow = currentRow;
-    }
-
     public int getCurrentCol() {
         return currentCol;
-    }
-
-    public void setCurrentCol(int currentCol) {
-        this.currentCol = currentCol;
     }
 
 
@@ -48,9 +32,6 @@ public class Player extends User{
         return myIndex;
     }
 
-//    public String getCard(String card){
-//
-//    }
     public void UpdateState(int row, int col){
         currentRow = row;
         currentCol = col;
@@ -81,4 +62,6 @@ public class Player extends User{
     public int getBridgeCard(){
         return gatheredCard.getBridge();
     }
+
+    public void setScore(){ this.score = gatheredCard.getScore();}
 }
