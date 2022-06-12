@@ -2,12 +2,11 @@ import java.util.*;
 
 public class Main{
     private static Map map;
-    private static int startRow;
-    private static int startCol;
     private static int numOfParticipants; //게임 참가 인원
     private static ArrayList<Player> player;
     private static Dice dice = new Dice();
     private static Move move = new Move();
+
 
 //    private final static String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/default.map";
     private static final String filePath = "/Users/seonghak/git/CAU-SE-BridgeGame/map/another.map";
@@ -19,13 +18,6 @@ public class Main{
         // map을 load한다.
         map = new Map(filePath);
 
-        // map의 시작 위치를 찾는다.
-        try {
-            startRow = map.getStartRow();
-            startCol = map.getStartCol();
-        } catch (NullPointerException e){
-            System.out.println(e);
-        }
         // map을 그린다.
         map.drawMap();
 
@@ -44,9 +36,10 @@ public class Main{
         player = new ArrayList<Player>();
         // arraylist에 객체 add
         for (int i=0; i<numOfParticipants; i++){
-            Player member = new Player(startRow, startCol);
+            Player member = new Player(map.getStartRow(), map.getStartCol());
             member.setMyIndex(i);
             player.add(member);
+
         }
 
 //      ---------------------------------------------게임 진행 코드-------------------------------------------
@@ -151,4 +144,5 @@ public class Main{
 //      ---------------------------------------------결과 출력 코드-------------------------------------------
 
     }
+
 }
